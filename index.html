@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tauan Dias | Portfólio</title>
+  <meta name="description" content="Portfólio de Tauan Dias, estudante de ADS na UDF focado em automação com IA, JavaScript e banco de dados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+    <div class="intro-inner">
+      <div class="chest" id="chest" aria-hidden="true">
+        <svg viewBox="0 0 32 28" shape-rendering="crispEdges" focusable="false">
+          <g class="body">
+            <rect x="2" y="12" width="28" height="15" fill="#4c2b10"/>
+            <rect x="3" y="13" width="26" height="13" fill="#7a4a22"/>
+            <rect x="3" y="13" width="26" height="1" fill="#9b6330"/>
+            <rect x="3" y="17" width="26" height="1" fill="#5a3416"/>
+            <rect x="3" y="21" width="26" height="1" fill="#5a3416"/>
+            <rect x="3" y="13" width="2" height="13" fill="#8b8795"/>
+            <rect x="27" y="13" width="2" height="13" fill="#8b8795"/>
+            <rect x="3" y="25" width="26" height="1" fill="#3b200c"/>
+          </g>
+          <g class="inside"><rect x="3" y="12" width="26" height="3" fill="#ffe08a"/></g>
+          <g class="lid">
+            <rect x="2" y="3" width="28" height="10" fill="#4c2b10"/>
+            <rect x="3" y="4" width="26" height="8" fill="#9b6330"/>
+            <rect x="3" y="4" width="26" height="1" fill="#b97a3d"/>
+            <rect x="3" y="8" width="26" height="1" fill="#7a4a22"/>
+            <rect x="3" y="4" width="2" height="8" fill="#8b8795"/>
+            <rect x="27" y="4" width="2" height="8" fill="#8b8795"/>
+            <rect x="14" y="10" width="4" height="6" fill="#4c2b10"/>
+            <rect x="15" y="11" width="2" height="4" fill="#e6b84a"/>
+          </g>
+        </svg>
+        <i class="chest-glow"></i>
+        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+      </div>
+      <h2 id="intro-title">Tauan Dias</h2>
+      <p>Estudante de ADS na UDF, focado em automação com IA. Neste baú guardo o que estudo, o que construí e como falar comigo.</p>
+      <button class="btn btn-gold" id="open-chest" type="button">Abrir o baú</button>
+      <button class="skip" id="skip-intro" type="button">Pular a abertura</button>
+    </div>
+  </div>
+
+  <div class="embers" id="embers" aria-hidden="true"></div>
+  <button class="btn ambient" id="ambient" type="button" aria-pressed="false">Som ambiente: desligado</button>
+
+  <header class="hero" id="inicio">
+    <div class="torch torch-left" aria-hidden="true"></div>
+    <div class="torch torch-right" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Tauan Dias</h1>
+      <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas na UDF. Aprendo a base da programação para guiar a IA e construir sites e automações.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#projetos">Ver projetos</a>
+        <a class="btn" href="#contato">Falar comigo</a>
+      </div>
+      <p class="hint">Dica: use as teclas 1 a 6 para viajar entre as seções.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap" id="sobre">
+      <h2>Sobre mim</h2>
+      <div class="panel">
+        <p>Estou focado em automação com Inteligência Artificial. Meu método é aprender bem a lógica, a estrutura do código e o banco de dados para saber pedir à IA o que ela precisa fazer. Depois eu reviso o que ela gera, testo e corrijo.</p>
+        <p>Uso Claude e Grok no dia a dia, e o Gemini só de vez em quando.</p>
+      </div>
+
+      <h3>Missões do semestre</h3>
+      <ul class="quests">
+        <li><strong>Banco de dados</strong><span>Modelagem e consultas SQL.</span></li>
+        <li><strong>Programação em C</strong><span>Lógica e estrutura de programas.</span></li>
+        <li><strong>Desenvolvimento web</strong><span>HTML, CSS e JavaScript.</span></li>
+        <li><strong>Design profissional</strong><span>Construção do meu perfil profissional.</span></li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="habilidades">
+      <h2>Habilidades</h2>
+      <div class="panel">
+        <ul class="skills">
+          <li><span class="name">HTML e CSS</span><div class="xp" data-level="5" role="img" aria-label="Nível 5 de 10"><i></i><b>5</b></div></li>
+          <li><span class="name">JavaScript</span><div class="xp" data-level="4" role="img" aria-label="Nível 4 de 10"><i></i><b>4</b></div></li>
+          <li><span class="name">SQL e banco de dados</span><div class="xp" data-level="3" role="img" aria-label="Nível 3 de 10"><i></i><b>3</b></div></li>
+          <li><span class="name">Linguagem C</span><div class="xp" data-level="3" role="img" aria-label="Nível 3 de 10"><i></i><b>3</b></div></li>
+          <li><span class="name">Git e GitHub</span><div class="xp" data-level="3" role="img" aria-label="Nível 3 de 10"><i></i><b>3</b></div></li>
+          <li><span class="name">IA e automação</span><div class="xp" data-level="4" role="img" aria-label="Nível 4 de 10"><i></i><b>4</b></div></li>
+        </ul>
+        <p class="note">Os níveis mostram minha evolução. Não são uma medida oficial.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="projetos">
+      <h2>Projetos</h2>
+      <div class="cards">
+        <article class="panel card">
+          <div class="icon icon-pick" aria-hidden="true"></div>
+          <h3>kubejs-modpack-scripts</h3>
+          <p>Scripts KubeJS para um modpack de Minecraft 1.21.1 (NeoForge): geração de minérios com a Mesa Vibratória e o Crushing do Create, além de receitas do XyCraft. Feito com apoio de IA.</p>
+          <ul class="tags"><li>JavaScript</li><li>KubeJS</li><li>NeoForge</li></ul>
+          <a class="btn btn-gold" href="https://github.com/Julgado010/kubejs-modpack-scripts" target="_blank" rel="noopener">Ver no GitHub</a>
+        </article>
+
+        <article class="panel card">
+          <div class="icon icon-book" aria-hidden="true"></div>
+          <h3>portfolio-web-tauan-dias</h3>
+          <p>Este site. Feito em HTML, CSS e JavaScript puros, sem bibliotecas, com apoio de IA e inspirado em Minecraft.</p>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <a class="btn btn-gold" href="https://github.com/Julgado010/portfolio-web-tauan-dias" target="_blank" rel="noopener">Ver no GitHub</a>
+        </article>
+
+        <article class="panel card locked">
+          <div class="icon icon-chest" aria-hidden="true"></div>
+          <h3>Baú trancado</h3>
+          <p>Mais projetos a caminho. Banco de dados e linguagem C estão no plano.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="taverna">
+      <h2>Taverna</h2>
+      <div class="panel jukebox">
+        <p>Escolha um disco e aperte tocar. O som só começa quando você clicar.</p>
+        <div class="discs" role="group" aria-label="Discos do jukebox">
+          <button class="disc" type="button" data-type="video" data-id="d0Wh4Bg96Gc"><i class="disc-art disc-red" aria-hidden="true"></i><span><strong>Rock clássico</strong><small>AC/DC, cerca de 1h de hits</small></span></button>
+          <button class="disc" type="button" data-type="video" data-id="Nds9oPVLATc"><i class="disc-art disc-blue" aria-hidden="true"></i><span><strong>Abertura de anime</strong><small>Pegasus Fantasy</small></span></button>
+          <button class="disc" type="button" data-type="list" data-id="PL3817D41C7D841E23"><i class="disc-art disc-green" aria-hidden="true"></i><span><strong>Minecraft</strong><small>C418, Volume Alpha</small></span></button>
+        </div>
+        <div class="player-frame" id="player-frame">
+          <div id="yt-player"></div>
+          <div class="player-empty">Nenhum disco inserido.</div>
+        </div>
+        <div class="controls">
+          <button class="btn" id="play" type="button">Tocar</button>
+          <label>Volume <input id="vol" type="range" min="0" max="100" value="60" aria-label="Volume do jukebox"></label>
+        </div>
+        <p class="now" id="now" aria-live="polite">Nenhum disco inserido.</p>
+        <p class="note">As músicas tocam pelo player oficial do YouTube e pertencem aos seus artistas e canais. O player só carrega depois que você escolhe um disco.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="contato">
+      <h2>Contato</h2>
+      <div class="panel">
+        <p>Quer conversar sobre estágio, projeto ou automação com IA? Escolha um caminho.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="https://www.linkedin.com/in/tauan-dias-1b078741a" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/Julgado010" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="mailto:tauanv347@gmail.com">E-mail</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>Feito com HTML, CSS e JavaScript, com apoio de IA (Claude). O som ambiente é gerado por código. As músicas do jukebox tocam pelo player oficial do YouTube e pertencem aos seus artistas e canais. Minecraft é marca da Mojang Studios. Este site é um projeto de estudo e não tem vínculo com a Mojang ou a Microsoft.</p>
+  </footer>
+
+  <nav class="hotbar" aria-label="Navegação principal">
+    <a href="#inicio" data-key="1" class="slot"><span class="ico" aria-hidden="true">🏰</span><span class="lbl">Início</span><kbd>1</kbd></a>
+    <a href="#sobre" data-key="2" class="slot"><span class="ico" aria-hidden="true">📜</span><span class="lbl">Sobre</span><kbd>2</kbd></a>
+    <a href="#habilidades" data-key="3" class="slot"><span class="ico" aria-hidden="true">⚔️</span><span class="lbl">Habilidades</span><kbd>3</kbd></a>
+    <a href="#projetos" data-key="4" class="slot"><span class="ico" aria-hidden="true">⛏️</span><span class="lbl">Projetos</span><kbd>4</kbd></a>
+    <a href="#taverna" data-key="5" class="slot"><span class="ico" aria-hidden="true">🎵</span><span class="lbl">Taverna</span><kbd>5</kbd></a>
+    <a href="#contato" data-key="6" class="slot"><span class="ico" aria-hidden="true">✉️</span><span class="lbl">Contato</span><kbd>6</kbd></a>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <div class="toast-icon" aria-hidden="true"></div>
+    <div><strong>Conquista desbloqueada</strong><span id="toast-text"></span></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
