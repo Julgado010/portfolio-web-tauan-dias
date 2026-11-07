@@ -25,6 +25,34 @@ Um site de uma página que apresenta quem eu sou, o que estou estudando, minhas 
 
 ---
 
+## 📸 Capturas de tela
+
+**Início**
+
+<img src="imagens/inicio.png" alt="Página inicial do portfólio, com o nome, as tochas e a barra de itens" width="800">
+
+**Sobre mim**
+
+<img src="imagens/sobre.png" alt="Seção Sobre mim com as missões do semestre" width="800">
+
+**Habilidades e projetos**
+
+<img src="imagens/habilidades-e-projetos.png" alt="Barras de XP das habilidades e o primeiro projeto" width="800">
+
+**Projetos**
+
+<img src="imagens/projetos.png" alt="Cartões de projetos e o baú trancado" width="800">
+
+**Taverna (jukebox)**
+
+<img src="imagens/taverna.png" alt="Jukebox com três discos para escolher" width="800">
+
+**Contato**
+
+<img src="imagens/contato.png" alt="Seção de contato com LinkedIn, GitHub e e-mail" width="800">
+
+---
+
 ## 🛠️ Tecnologias
 
 - **HTML5**
