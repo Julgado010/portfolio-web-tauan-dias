@@ -410,3 +410,5 @@ main section.band:nth-of-type(even) { background: rgba(255,255,255,.03); border-
 @media (prefers-reduced-motion: reduce) {
   .intro-char { transition: none; }
 }
+
+.ambient[hidden] { display: none; }

@@ -81,84 +81,108 @@ addEventListener("keydown", (e) => {
   if (i >= 0 && i < sections.length) sections[i].scrollIntoView({ behavior: "smooth" });
 });
 
-// ---------- Som ambiente (gerado por código, sem arquivos de áudio) ----------
-const Ambient = (() => {
-  let ctx, master, bus, timer, oscs = [], on = false;
-  const scale = [293.66, 349.23, 392.0, 440.0, 523.25, 587.33, 698.46]; // Ré dórico
-  function pluck() {
-    const t = ctx.currentTime;
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = "triangle";
-    o.frequency.value = scale[Math.floor(Math.random() * scale.length)];
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(0.22, t + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 1.6);
-    o.connect(g); g.connect(bus);
-    o.start(t); o.stop(t + 1.7);
+// ---------- Trilha de fundo (arquivos de áudio em assets/music, em loop e bem baixinha) ----------
+const Bgm = (() => {
+  const tracks = (document.body.dataset.bgm || "").split(",").map((t) => t.trim()).filter(Boolean);
+  const VOLUME = 0.12;                       // bem baixinho, para não incomodar
+  let audio = null, idx = 0, on = false, failed = false, fadeIv = null, listener = null;
+  const prefOff = () => { try { return localStorage.getItem("bgmOff") === "1"; } catch (_) { return false; } };
+  const setPref = (off) => { try { localStorage.setItem("bgmOff", off ? "1" : "0"); } catch (_) {} };
+
+  function fade(to, ms, done) {
+    clearInterval(fadeIv);
+    const from = audio.volume, steps = Math.max(1, Math.round(ms / 50));
+    let i = 0;
+    fadeIv = setInterval(() => {
+      i++;
+      audio.volume = Math.max(0, Math.min(1, from + (to - from) * (i / steps)));
+      if (i >= steps) { clearInterval(fadeIv); if (done) done(); }
+    }, 50);
   }
-  function schedule() {
-    pluck();
-    timer = setTimeout(schedule, 900 + Math.random() * 2200);
-  }
-  function start() {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    ctx = ctx || new AC();
-    if (ctx.state === "suspended") ctx.resume();
-    master = ctx.createGain();
-    master.gain.value = 0;
-    master.connect(ctx.destination);
-    master.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 2);
-    const delay = ctx.createDelay(1);
-    delay.delayTime.value = 0.42;
-    const fb = ctx.createGain(); fb.gain.value = 0.38;
-    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1800;
-    delay.connect(lp); lp.connect(fb); fb.connect(delay); lp.connect(master);
-    bus = ctx.createGain();
-    bus.connect(master); bus.connect(delay);
-    [73.42, 110].forEach((f, i) => {
-      const o = ctx.createOscillator(); o.type = "triangle"; o.frequency.value = f;
-      const g = ctx.createGain(); g.gain.value = 0.08;
-      const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07 + i * 0.03;
-      const lg = ctx.createGain(); lg.gain.value = 0.04;
-      lfo.connect(lg); lg.connect(g.gain);
-      o.connect(g); g.connect(bus);
-      o.start(); lfo.start();
-      oscs.push(o, lfo);
+  function ensure() {
+    if (audio) return audio;
+    audio = new Audio();
+    audio.preload = "auto";
+    audio.volume = 0;
+    audio.loop = tracks.length === 1;
+    audio.src = tracks[0];
+    audio.addEventListener("ended", () => {  // passa para a próxima parte e volta ao início no fim
+      idx = (idx + 1) % tracks.length;
+      audio.src = tracks[idx];
+      audio.play().catch(() => {});
     });
-    schedule();
+    audio.addEventListener("error", () => {
+      if (tracks.length > 1 && idx > 0) {     // parte ausente: volta para a primeira
+        idx = 0; audio.src = tracks[0]; audio.play().catch(() => {});
+        return;
+      }
+      failed = true; on = false; render();
+    });
+    return audio;
+  }
+  async function start() {
+    if (!tracks.length || failed) return false;
+    const a = ensure();
+    try { await a.play(); } catch (_) { return false; }
     on = true;
+    fade(VOLUME, 2500);
+    render();
     return true;
   }
-  function stop() {
-    if (!on) return;
+  function stop(ms = 700) {
+    if (!audio || !on) return;
     on = false;
-    clearTimeout(timer);
-    const m = master, old = oscs;
-    oscs = [];
-    m.gain.cancelScheduledValues(ctx.currentTime);
-    m.gain.setValueAtTime(m.gain.value, ctx.currentTime);
-    m.gain.linearRampToValueAtTime(0, ctx.currentTime + 1);
-    setTimeout(() => { old.forEach((o) => { try { o.stop(); } catch (_) {} }); m.disconnect(); }, 1100);
+    const a = audio;
+    fade(0, ms, () => { if (!on) a.pause(); });
+    render();
   }
-  return { start, stop, get on() { return on; } };
+  // A primeira interação do visitante (clique ou tecla) inicia a trilha, se ele não a desligou antes
+  function arm() {
+    if (!tracks.length || prefOff()) return;
+    listener = (e) => {
+      if (e.target && e.target.closest && e.target.closest(".jukebox, .ambient")) return;
+      removeEventListener("pointerdown", listener, true);
+      removeEventListener("keydown", listener, true);
+      start();
+    };
+    addEventListener("pointerdown", listener, true);
+    addEventListener("keydown", listener, true);
+  }
+  function disarm() {
+    if (!listener) return;
+    removeEventListener("pointerdown", listener, true);
+    removeEventListener("keydown", listener, true);
+    listener = null;
+  }
+  function check() {                         // confere se a primeira parte existe no site publicado
+    if (!tracks.length || !location.protocol.startsWith("http")) return;
+    fetch(tracks[0], { method: "HEAD" }).then((res) => { if (!res.ok) { failed = true; render(); } }).catch(() => {});
+  }
+  return { start, stop, arm, disarm, check, setPref, get on() { return on; }, get failed() { return failed; }, get has() { return tracks.length > 0; } };
 })();
 
-const ambientBtn = document.getElementById("ambient");
-function renderAmbient() {
-  ambientBtn.textContent = "Som ambiente: " + (Ambient.on ? "ligado" : "desligado");
-  ambientBtn.setAttribute("aria-pressed", String(Ambient.on));
+const bgmBtn = document.getElementById("bgm");
+function render() {
+  if (!bgmBtn) return;
+  bgmBtn.textContent = "Música de fundo: " + (Bgm.failed ? "indisponível" : Bgm.on ? "ligada" : "desligada");
+  bgmBtn.setAttribute("aria-pressed", String(Bgm.on));
+  bgmBtn.hidden = !Bgm.has || Bgm.failed;   // sem arquivo de música, o botão não aparece
 }
-ambientBtn.addEventListener("click", () => {
-  if (Ambient.on) Ambient.stop();
-  else {
-    try { if (player && player.pauseVideo) player.pauseVideo(); } catch (_) {}
-    Ambient.start();
-    achieve("ambient", "Clima de taverna");
-  }
-  renderAmbient();
-});
+if (bgmBtn) {
+  bgmBtn.addEventListener("click", async () => {
+    Bgm.disarm();
+    if (Bgm.on) { Bgm.stop(); Bgm.setPref(true); }
+    else {
+      try { if (player && player.pauseVideo) player.pauseVideo(); } catch (_) {}
+      Bgm.setPref(false);
+      if (await Bgm.start()) achieve("bgm", "Trilha da taverna");
+    }
+    render();
+  });
+  render();
+  Bgm.arm();
+  Bgm.check();
+}
 
 // ---------- Jukebox (player oficial do YouTube, carregado só depois do clique) ----------
 const discs = [...document.querySelectorAll(".disc")];
@@ -215,7 +239,7 @@ function startDisc(d) {
 function onState(e) {
   const S = YT.PlayerState;
   if (e.data === S.PLAYING) {
-    Ambient.stop(); renderAmbient();
+    Bgm.stop(); render();
     playBtn.textContent = "Pausar";
     const title = player.getVideoData && player.getVideoData().title;
     setNow("Tocando: " + (title || "disco"));
@@ -234,6 +258,7 @@ function onErr(e) {
   playBtn.textContent = "Tocar";
 }
 function chooseDisc(d) {
+  Bgm.stop(); Bgm.disarm();                  // escolheu um disco: a trilha de fundo para
   current = d;
   discs.forEach((b) => b.classList.toggle("active", b === d));
   if (location.protocol === "file:") {
@@ -250,7 +275,7 @@ playBtn.addEventListener("click", () => {
   if (!player) { chooseDisc(current); return; }
   const st = player.getPlayerState();
   if (st === YT.PlayerState.PLAYING) player.pauseVideo();
-  else player.playVideo();
+  else { Bgm.stop(); player.playVideo(); }
 });
 vol.addEventListener("input", () => { if (player && player.setVolume) player.setVolume(Number(vol.value)); });
 
