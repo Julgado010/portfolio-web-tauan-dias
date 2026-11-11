@@ -13,43 +13,19 @@ Site de portfólio pessoal de **Tauan Dias**, estudante de Análise e Desenvolvi
 Um site de uma página que apresenta quem eu sou, o que estou estudando, minhas habilidades e meus projetos. O projeto aplica o que aprendo nas matérias de **Desenvolvimento Web** e **Design Profissional**.
 
 **Destaques do visual:**
-- **Abertura com baú**: ao entrar, o visitante abre um baú em pixel art para acessar o site (com botão de pular, navegação por teclado e suporte a movimento reduzido)
+- **Logo "DIAZ"** em um retângulo de latão com a placa do meu nome, no topo, na abertura e no início
+- **Abertura com personagem e baú**: ao entrar, meu personagem (a minha skin de Minecraft) chega andando, o visitante clica em abrir, ele alcança o baú e comemora (com botão de pular, navegação por teclado e suporte a movimento reduzido)
+- **Personagem animado no início**: ele respira, acena sozinho, acompanha o mouse com a cabeça e acena ao clique
+- **Botão "Baixar skin"** para baixar a skin (Minecraft Java, modelo Classic)
+- **Layout de ponta a ponta**, com barras de título e caixas em vez de elementos soltos
 - Cursor de espada em pixel art, desenhado por código (sem imagens externas)
 - Barra de itens (hotbar) fixa no rodapé, que também responde às teclas **1 a 6**
 - Barras de XP para as habilidades, que enchem quando aparecem na tela
 - Notificações de conquista ao navegar pelas seções
 - **Som ambiente medieval** gerado por código (Web Audio API), ligado só quando o visitante clica
 - **Jukebox na Taverna** com 3 discos (rock clássico, abertura de anime e trilha do Minecraft), tocando pelo player oficial do YouTube
-- Tochas animadas e brasas no fundo (respeitam `prefers-reduced-motion`)
+- Brasas subindo no fundo (respeitam `prefers-reduced-motion`)
 - Layout responsivo, com foco visível para navegação por teclado
-
----
-
-## 📸 Capturas de tela
-
-**Início**
-
-<img src="imagens/inicio.png" alt="Página inicial do portfólio, com o nome, as tochas e a barra de itens" width="800">
-
-**Sobre mim**
-
-<img src="imagens/sobre.png" alt="Seção Sobre mim com as missões do semestre" width="800">
-
-**Habilidades e projetos**
-
-<img src="imagens/habilidades-e-projetos.png" alt="Barras de XP das habilidades e o primeiro projeto" width="800">
-
-**Projetos**
-
-<img src="imagens/projetos.png" alt="Cartões de projetos e o baú trancado" width="800">
-
-**Taverna (jukebox)**
-
-<img src="imagens/taverna.png" alt="Jukebox com três discos para escolher" width="800">
-
-**Contato**
-
-<img src="imagens/contato.png" alt="Seção de contato com LinkedIn, GitHub e e-mail" width="800">
 
 ---
 
@@ -68,10 +44,19 @@ Um site de uma página que apresenta quem eu sou, o que estou estudando, minhas 
 portfolio-web-tauan-dias/
 ├── index.html   # estrutura e conteúdo
 ├── style.css    # visual e responsividade
-├── script.js    # cursor, conquistas, hotbar e barras de XP
+├── script.js    # cursor, personagem, abertura, conquistas, hotbar, XP e jukebox
+├── assets/
+│   ├── skin-diaz.png   # a skin (64x64, modelo Classic)
+│   └── char/           # quadros do personagem usados nas animações
 ├── LICENSE
 └── README.md
 ```
+
+---
+
+## 🧍 Sobre o personagem
+
+A skin foi criada com apoio de IA e é minha. As animações usam **quadros PNG pré-renderizados** da própria skin (parado, acenando, olhando para os lados, andando e abrindo o baú), trocados por JavaScript. Assim o site continua sem bibliotecas e carrega rápido.
 
 ---
 
@@ -100,7 +85,7 @@ O site é publicado com **GitHub Pages**, a partir da branch `main`.
 
 ## ⚖️ Créditos e avisos
 
-Minecraft é marca da Mojang Studios. Este projeto é feito para estudo e não tem vínculo com a Mojang ou a Microsoft. Todos os elementos visuais (espada, tochas, ícones) são desenhados por código.
+Minecraft é marca da Mojang Studios. Este projeto é feito para estudo e não tem vínculo com a Mojang ou a Microsoft. Os elementos visuais (espada, ícones, logo, baú) são desenhados por código. O personagem é a minha skin original.
 
 ## 📜 Licença
 

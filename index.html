@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tauan Dias | Portfólio</title>
+  <title>Diaz | Portfólio de Tauan Dias</title>
   <meta name="description" content="Portfólio de Tauan Dias, estudante de ADS na UDF focado em automação com IA, JavaScript e banco de dados.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,15 @@
 </head>
 <body>
   <div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title">
-    <div class="intro-inner">
-      <div class="chest" id="chest" aria-hidden="true">
-        <svg viewBox="0 0 32 28" shape-rendering="crispEdges" focusable="false">
+    <div class="intro-box panel">
+      <h2 class="sign sign-lg" id="intro-title" aria-label="Diaz, Tauan Dias">
+        <span class="logo" aria-hidden="true">DIAZ</span>
+        <span class="plate" aria-hidden="true">Tauan Dias</span>
+      </h2>
+      <div class="intro-stage">
+        <img class="char intro-char" id="intro-char" src="assets/char/walk0.png" alt="Personagem com a skin do Tauan, usando óculos do Create na testa" width="190" height="280">
+        <div class="chest" id="chest" aria-hidden="true">
+          <svg viewBox="0 0 32 28" shape-rendering="crispEdges" focusable="false">
           <g class="body">
             <rect x="2" y="12" width="28" height="15" fill="#4c2b10"/>
             <rect x="3" y="13" width="26" height="13" fill="#7a4a22"/>
@@ -37,53 +43,83 @@
             <rect x="15" y="11" width="2" height="4" fill="#e6b84a"/>
           </g>
         </svg>
-        <i class="chest-glow"></i>
-        <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
-        <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+          <i class="chest-glow"></i>
+          <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+          <i class="spark s4"></i><i class="spark s5"></i><i class="spark s6"></i>
+        </div>
+        <div class="floor" aria-hidden="true"></div>
       </div>
-      <h2 id="intro-title">Tauan Dias</h2>
       <p>Estudante de ADS na UDF, focado em automação com IA. Neste baú guardo o que estudo, o que construí e como falar comigo.</p>
-      <button class="btn btn-gold" id="open-chest" type="button">Abrir o baú</button>
-      <button class="skip" id="skip-intro" type="button">Pular a abertura</button>
+      <div class="actions center">
+        <button class="btn btn-gold" id="open-chest" type="button">Abrir o baú</button>
+        <button class="skip" id="skip-intro" type="button">Pular a abertura</button>
+      </div>
     </div>
   </div>
 
   <div class="embers" id="embers" aria-hidden="true"></div>
-  <button class="btn ambient" id="ambient" type="button" aria-pressed="false">Som ambiente: desligado</button>
+  <div class="topbar">
+    <a class="sign sign-sm" href="#inicio" aria-label="Diaz, Tauan Dias, início">
+      <span class="logo" aria-hidden="true">DIAZ</span>
+      <span class="plate" aria-hidden="true">Tauan Dias</span>
+    </a>
+    <span class="tag">ADS · UDF · Automação com IA</span>
+    <button class="btn ambient" id="ambient" type="button" aria-pressed="false">Som ambiente: desligado</button>
+  </div>
 
   <header class="hero" id="inicio">
-    <div class="torch torch-left" aria-hidden="true"></div>
-    <div class="torch torch-right" aria-hidden="true"></div>
-    <div class="wrap">
-      <h1>Tauan Dias</h1>
-      <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas na UDF. Aprendo a base da programação para guiar a IA e construir sites e automações.</p>
-      <div class="actions">
-        <a class="btn btn-gold" href="#projetos">Ver projetos</a>
-        <a class="btn" href="#contato">Falar comigo</a>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 class="sign sign-xl" aria-label="Diaz, Tauan Dias">
+          <span class="logo" aria-hidden="true">DIAZ</span>
+          <span class="plate" aria-hidden="true">Tauan Dias</span>
+        </h1>
+        <div class="panel lead-box">
+          <p class="lead">Estudante de Análise e Desenvolvimento de Sistemas na UDF. Aprendo a base da programação para guiar a IA e construir sites e automações.</p>
+          <div class="actions">
+            <a class="btn btn-gold" href="#projetos">Ver projetos</a>
+            <a class="btn" href="#contato">Falar comigo</a>
+          </div>
+        </div>
+        <p class="hint">Dica: use as teclas 1 a 6 para viajar entre as seções.</p>
       </div>
-      <p class="hint">Dica: use as teclas 1 a 6 para viajar entre as seções.</p>
+
+      <figure class="panel stage" id="stage">
+        <div class="stage-glow" aria-hidden="true"></div>
+        <img class="char hero-char" id="hero-char" src="assets/char/idle0.png" alt="Personagem com a skin do Tauan: cabelo castanho e preto, óculos do Create na testa, jaqueta preta e antebraços camuflados" width="260" height="383">
+        <div class="floor" aria-hidden="true"></div>
+        <figcaption>
+          <span>Minha skin de Minecraft. Mexa o mouse e ele olha para você; clique para ele acenar.</span>
+          <a class="btn btn-gold" href="assets/skin-diaz.png" download="skin-diaz.png">Baixar skin</a>
+        </figcaption>
+      </figure>
     </div>
   </header>
 
   <main>
-    <section class="wrap" id="sobre">
-      <h2>Sobre mim</h2>
+    <section class="band" id="sobre"><div class="wrap">
+      <h2 class="bar">Sobre mim</h2>
+      <div class="grid-2">
       <div class="panel">
+        <h3 class="h3-first">Quem sou eu</h3>
         <p>Estou focado em automação com Inteligência Artificial. Meu método é aprender bem a lógica, a estrutura do código e o banco de dados para saber pedir à IA o que ela precisa fazer. Depois eu reviso o que ela gera, testo e corrijo.</p>
         <p>Uso Claude e Grok no dia a dia, e o Gemini só de vez em quando.</p>
       </div>
 
-      <h3>Missões do semestre</h3>
+      <div class="panel">
+      <h3 class="h3-first">Missões do semestre</h3>
       <ul class="quests">
         <li><strong>Banco de dados</strong><span>Modelagem e consultas SQL.</span></li>
         <li><strong>Programação em C</strong><span>Lógica e estrutura de programas.</span></li>
         <li><strong>Desenvolvimento web</strong><span>HTML, CSS e JavaScript.</span></li>
         <li><strong>Design profissional</strong><span>Construção do meu perfil profissional.</span></li>
       </ul>
-    </section>
+      </div>
+      </div>
+    </div></section>
 
-    <section class="wrap" id="habilidades">
-      <h2>Habilidades</h2>
+    <section class="band" id="habilidades"><div class="wrap">
+      <h2 class="bar">Habilidades</h2>
       <div class="panel">
         <ul class="skills">
           <li><span class="name">HTML e CSS</span><div class="xp" data-level="5" role="img" aria-label="Nível 5 de 10"><i></i><b>5</b></div></li>
@@ -95,10 +131,10 @@
         </ul>
         <p class="note">Os níveis mostram minha evolução. Não são uma medida oficial.</p>
       </div>
-    </section>
+    </div></section>
 
-    <section class="wrap" id="projetos">
-      <h2>Projetos</h2>
+    <section class="band" id="projetos"><div class="wrap">
+      <h2 class="bar">Projetos</h2>
       <div class="cards">
         <article class="panel card">
           <div class="icon icon-pick" aria-hidden="true"></div>
@@ -122,17 +158,21 @@
           <p>Mais projetos a caminho. Banco de dados e linguagem C estão no plano.</p>
         </article>
       </div>
-    </section>
+    </div></section>
 
-    <section class="wrap" id="taverna">
-      <h2>Taverna</h2>
+    <section class="band" id="taverna"><div class="wrap">
+      <h2 class="bar">Taverna</h2>
       <div class="panel jukebox">
+        <div class="jukebox-grid">
+        <div class="jukebox-left">
         <p>Escolha um disco e aperte tocar. O som só começa quando você clicar.</p>
         <div class="discs" role="group" aria-label="Discos do jukebox">
           <button class="disc" type="button" data-type="video" data-id="d0Wh4Bg96Gc"><i class="disc-art disc-red" aria-hidden="true"></i><span><strong>Rock clássico</strong><small>AC/DC, cerca de 1h de hits</small></span></button>
           <button class="disc" type="button" data-type="video" data-id="Nds9oPVLATc"><i class="disc-art disc-blue" aria-hidden="true"></i><span><strong>Abertura de anime</strong><small>Pegasus Fantasy</small></span></button>
           <button class="disc" type="button" data-type="list" data-id="PL3817D41C7D841E23"><i class="disc-art disc-green" aria-hidden="true"></i><span><strong>Minecraft</strong><small>C418, Volume Alpha</small></span></button>
         </div>
+        </div>
+        <div class="jukebox-right">
         <div class="player-frame" id="player-frame">
           <div id="yt-player"></div>
           <div class="player-empty">Nenhum disco inserido.</div>
@@ -143,11 +183,13 @@
         </div>
         <p class="now" id="now" aria-live="polite">Nenhum disco inserido.</p>
         <p class="note">As músicas tocam pelo player oficial do YouTube e pertencem aos seus artistas e canais. O player só carrega depois que você escolhe um disco.</p>
+        </div>
+        </div>
       </div>
-    </section>
+    </div></section>
 
-    <section class="wrap" id="contato">
-      <h2>Contato</h2>
+    <section class="band" id="contato"><div class="wrap">
+      <h2 class="bar">Contato</h2>
       <div class="panel">
         <p>Quer conversar sobre estágio, projeto ou automação com IA? Escolha um caminho.</p>
         <div class="actions">
@@ -156,12 +198,12 @@
           <a class="btn" href="mailto:tauanv347@gmail.com">E-mail</a>
         </div>
       </div>
-    </section>
+    </div></section>
   </main>
 
-  <footer class="wrap foot">
+  <footer class="foot"><div class="wrap"><div class="panel">
     <p>Feito com HTML, CSS e JavaScript, com apoio de IA (Claude). O som ambiente é gerado por código. As músicas do jukebox tocam pelo player oficial do YouTube e pertencem aos seus artistas e canais. Minecraft é marca da Mojang Studios. Este site é um projeto de estudo e não tem vínculo com a Mojang ou a Microsoft.</p>
-  </footer>
+  </div></div></footer>
 
   <nav class="hotbar" aria-label="Navegação principal">
     <a href="#inicio" data-key="1" class="slot"><span class="ico" aria-hidden="true">🏰</span><span class="lbl">Início</span><kbd>1</kbd></a>

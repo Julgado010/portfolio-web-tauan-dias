@@ -254,7 +254,50 @@ playBtn.addEventListener("click", () => {
 });
 vol.addEventListener("input", () => { if (player && player.setVolume) player.setVolume(Number(vol.value)); });
 
-// ---------- Abertura: o baú ----------
+// ---------- Personagem (quadros pré-renderizados da minha skin) ----------
+const CHAR_DIR = "assets/char/";
+["idle0","idle1","wave0","wave1","wave2","wave3","look0","look1","look2","look3","look4",
+ "stand0","stand1","reach0","reach1","reach2","reach3","cheer0","cheer1","walk0","walk1","walk2","walk3"]
+  .forEach((n) => { const i = new Image(); i.src = CHAR_DIR + n + ".png"; });
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+(function heroChar() {
+  const img = document.getElementById("hero-char");
+  const stage = document.getElementById("stage");
+  if (!img || !stage) return;
+  const set = (n) => { img.src = CHAR_DIR + n + ".png"; };
+  if (reducedMotion) return;
+  let waving = false, tick = 0, lastMove = 0;
+  setInterval(() => {                       // respira quando ninguém mexe o mouse
+    if (waving || performance.now() - lastMove < 1200) return;
+    tick ^= 1; set("idle" + tick);
+  }, 700);
+  addEventListener("pointermove", (e) => {  // a cabeça acompanha o mouse
+    if (waving) return;
+    lastMove = performance.now();
+    const r = stage.getBoundingClientRect();
+    const t = (e.clientX - (r.left + r.width / 2)) / (innerWidth / 2);
+    set("look" + Math.max(0, Math.min(4, Math.round(2 + t * 2.4))));
+  });
+  function wave() {
+    if (waving) return;
+    waving = true;
+    const seq = [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 0];
+    let k = 0;
+    const iv = setInterval(() => {
+      if (k >= seq.length) { clearInterval(iv); waving = false; set("idle0"); return; }
+      set("wave" + seq[k++]);
+    }, 140);
+  }
+  img.addEventListener("click", () => { wave(); achieve("wave", "Cumprimentou o dono da taverna"); });
+  window.heroWave = wave;
+  const io = new IntersectionObserver((es) => {
+    if (es[0].isIntersecting && !introActive) { setTimeout(wave, 800); io.disconnect(); }
+  }, { threshold: 0.6 });
+  io.observe(img);
+})();
+
+// ---------- Abertura: o personagem abre o baú ----------
 const intro = document.getElementById("intro");
 let introActive = !!intro;
 (function setupIntro() {
@@ -272,32 +315,65 @@ let introActive = !!intro;
   const openBtn = document.getElementById("open-chest");
   const skipBtn = document.getElementById("skip-intro");
   const chest = document.getElementById("chest");
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const stage = intro.querySelector(".intro-stage");
+  const ch = document.getElementById("intro-char");
+  const setC = (n) => { ch.src = CHAR_DIR + n + ".png"; };
+  const timers = [];
+  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+  let walkIv, idleIv, cheerIv;
   rest.forEach((el) => { el.inert = true; });
   document.body.classList.add("intro-lock");
   openBtn.focus();
 
   function finish(message) {
     introActive = false;
+    clearInterval(walkIv); clearInterval(idleIv); clearInterval(cheerIv);
+    timers.forEach(clearTimeout);
     rest.forEach((el) => { el.inert = false; });
     document.body.classList.remove("intro-lock");
     intro.remove();
     try { sessionStorage.setItem("introSeen", "1"); } catch (_) {}
     window.scrollTo(0, 0);
     setTimeout(() => achieve("welcome", message), 500);
+    setTimeout(() => { if (window.heroWave) window.heroWave(); }, 1200);
   }
+
+  // O personagem entra andando e para ao lado do baú
+  if (reducedMotion) {
+    stage.classList.add("arrived"); setC("stand0");
+  } else {
+    let w = 0, t = 0;
+    walkIv = setInterval(() => setC("walk" + (w++ % 4)), 160);
+    requestAnimationFrame(() => requestAnimationFrame(() => stage.classList.add("arrived")));
+    later(() => {
+      clearInterval(walkIv); setC("stand0");
+      idleIv = setInterval(() => { t ^= 1; setC("stand" + t); }, 700);
+    }, 1350);
+  }
+
   let opened = false;
+  function leave() {
+    intro.classList.add("leaving");
+    later(() => finish("Baú aberto"), reducedMotion ? 0 : 600);
+  }
   function open() {
     if (opened) return;
     opened = true;
-    intro.classList.add("opening");
-    chest.classList.add("open");
+    clearInterval(walkIv); clearInterval(idleIv);
+    stage.classList.add("arrived");
     openBtn.disabled = true;
     skipBtn.style.visibility = "hidden";
-    setTimeout(() => {
-      intro.classList.add("leaving");
-      setTimeout(() => finish("Baú aberto"), reduced ? 0 : 600);
-    }, reduced ? 250 : 1500);
+    if (reducedMotion) {
+      intro.classList.add("opening"); chest.classList.add("open"); setC("cheer0");
+      later(leave, 250);
+      return;
+    }
+    setC("reach0");
+    later(() => setC("reach1"), 150);
+    later(() => { setC("reach2"); intro.classList.add("opening"); chest.classList.add("open"); }, 300);
+    later(() => setC("reach3"), 450);
+    later(() => { let c = 0; setC("cheer0"); cheerIv = setInterval(() => setC("cheer" + (++c % 2)), 220); }, 800);
+    later(leave, 2200);
   }
   openBtn.addEventListener("click", open);
   chest.addEventListener("click", open);
