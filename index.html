@@ -7,7 +7,10 @@
   <meta name="description" content="Portfólio de Tauan Dias, estudante de ADS na UDF focado em automação com IA, JavaScript e banco de dados.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=VT323&display=swap" rel="stylesheet">
+  <!-- A fonte carrega sem travar a página: o texto aparece na hora e a fonte entra em seguida -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=VT323&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=VT323&display=swap"></noscript>
+  <link rel="preload" as="image" href="assets/char/walk0.webp" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-bgm="assets/music/fundo-1.mp3,assets/music/fundo-2.mp3,assets/music/fundo-3.mp3">
@@ -18,7 +21,7 @@
         <span class="plate" aria-hidden="true">Tauan Dias</span>
       </h2>
       <div class="intro-stage">
-        <img class="char intro-char" id="intro-char" src="assets/char/walk0.png" alt="Personagem com a skin do Tauan, usando óculos do Create na testa" width="190" height="280">
+        <img class="char intro-char" id="intro-char" src="assets/char/walk0.webp" decoding="async" fetchpriority="high" alt="Personagem com a skin do Tauan, usando óculos do Create na testa" width="190" height="280">
         <div class="chest" id="chest" aria-hidden="true">
           <svg viewBox="0 0 32 28" shape-rendering="crispEdges" focusable="false">
           <g class="body">
@@ -86,7 +89,7 @@
 
       <figure class="panel stage" id="stage">
         <div class="stage-glow" aria-hidden="true"></div>
-        <img class="char hero-char" id="hero-char" src="assets/char/idle0.png" alt="Personagem com a skin do Tauan: cabelo castanho e preto, óculos do Create na testa, jaqueta preta e antebraços camuflados" width="260" height="383">
+        <img class="char hero-char" id="hero-char" src="assets/char/idle0.webp" decoding="async" alt="Personagem com a skin do Tauan: cabelo castanho e preto, óculos do Create na testa, jaqueta preta e antebraços camuflados" width="260" height="383">
         <div class="floor" aria-hidden="true"></div>
         <figcaption>
           <span>Minha skin de Minecraft. Mexa o mouse e ele olha para você; clique para ele acenar.</span>
@@ -99,7 +102,11 @@
   <main>
     <section class="band" id="sobre"><div class="wrap">
       <h2 class="bar">Sobre mim</h2>
-      <div class="grid-2">
+      <div class="about-grid">
+      <figure class="panel portrait">
+        <img src="assets/img/retrato-personagem.webp" alt="Retrato do meu personagem de Minecraft: cabelo castanho e preto, óculos do Create na testa e jaqueta preta" width="320" height="320" loading="lazy" decoding="async">
+        <figcaption><strong>Diaz</strong><span>Tauan Dias · ADS na UDF</span></figcaption>
+      </figure>
       <div class="panel">
         <h3 class="h3-first">Quem sou eu</h3>
         <p>Estou focado em automação com Inteligência Artificial. Meu método é aprender bem a lógica, a estrutura do código e o banco de dados para saber pedir à IA o que ela precisa fazer. Depois eu reviso o que ela gera, testo e corrijo.</p>
@@ -137,7 +144,7 @@
       <h2 class="bar">Projetos</h2>
       <div class="cards">
         <article class="panel card">
-          <div class="icon icon-pick" aria-hidden="true"></div>
+          <figure class="cover"><img src="assets/img/capa-modpack.webp" alt="Tela de receita do Create mostrando o Crushing: um bloco entra e quatro minérios saem" width="640" height="360" loading="lazy" decoding="async"></figure>
           <h3>kubejs-modpack-scripts</h3>
           <p>Scripts KubeJS para um modpack de Minecraft 1.21.1 (NeoForge): geração de minérios com a Mesa Vibratória e o Crushing do Create, além de receitas do XyCraft. Feito com apoio de IA.</p>
           <ul class="tags"><li>JavaScript</li><li>KubeJS</li><li>NeoForge</li></ul>
@@ -145,7 +152,7 @@
         </article>
 
         <article class="panel card">
-          <div class="icon icon-book" aria-hidden="true"></div>
+          <figure class="cover"><img src="assets/img/capa-portfolio.webp" alt="Página inicial deste site, com o logo Diaz e o personagem" width="640" height="360" loading="lazy" decoding="async"></figure>
           <h3>portfolio-web-tauan-dias</h3>
           <p>Este site. Feito em HTML, CSS e JavaScript puros, sem bibliotecas, com apoio de IA e inspirado em Minecraft.</p>
           <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
@@ -153,7 +160,7 @@
         </article>
 
         <article class="panel card locked">
-          <div class="icon icon-chest" aria-hidden="true"></div>
+          <figure class="cover"><img src="assets/img/capa-em-breve.webp" alt="Cadeado dourado sobre uma parede de pedra" width="640" height="360" loading="lazy" decoding="async"></figure>
           <h3>Baú trancado</h3>
           <p>Mais projetos a caminho. Banco de dados e linguagem C estão no plano.</p>
         </article>

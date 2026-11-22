@@ -17,6 +17,9 @@ Um site de uma página que apresenta quem eu sou, o que estou estudando, minhas 
 - **Abertura com personagem e baú**: ao entrar, meu personagem (a minha skin de Minecraft) chega andando, o visitante clica em abrir, ele alcança o baú e comemora (com botão de pular, navegação por teclado e suporte a movimento reduzido)
 - **Personagem animado no início**: ele respira, acena sozinho, acompanha o mouse com a cabeça e acena ao clique
 - **Botão "Baixar skin"** para baixar a skin (Minecraft Java, modelo Classic)
+- **Cenário em pixel art** no início (céu com lua e castelo) e texturas de pedra e madeira nas seções, tudo desenhado por código
+- **Capas nos projetos** e um retrato do personagem na seção Sobre
+- **Leve e rápido**: imagens em WebP, fonte carregada sem travar a página, quadros do personagem carregados aos poucos e música em 64 kbps
 - **Layout de ponta a ponta**, com barras de título e caixas em vez de elementos soltos
 - Cursor de espada em pixel art, desenhado por código (sem imagens externas)
 - Barra de itens (hotbar) fixa no rodapé, que também responde às teclas **1 a 6**
@@ -48,6 +51,7 @@ portfolio-web-tauan-dias/
 ├── assets/
 │   ├── skin-diaz.png   # a skin (64x64, modelo Classic)
 │   ├── music/          # partes da música de fundo (fundo-1.mp3, fundo-2.mp3...)
+│   ├── img/            # cenário, texturas, capas dos projetos e retrato (WebP)
 │   └── char/           # quadros do personagem usados nas animações
 ├── LICENSE
 └── README.md
@@ -57,7 +61,7 @@ portfolio-web-tauan-dias/
 
 ## 🧍 Sobre o personagem
 
-A skin foi criada com apoio de IA e é minha. As animações usam **quadros PNG pré-renderizados** da própria skin (parado, acenando, olhando para os lados, andando e abrindo o baú), trocados por JavaScript. Assim o site continua sem bibliotecas e carrega rápido.
+A skin foi criada com apoio de IA e é minha. As animações usam **quadros WebP pré-renderizados** da própria skin (parado, acenando, olhando para os lados, andando e abrindo o baú), trocados por JavaScript. Assim o site continua sem bibliotecas e carrega rápido.
 
 ---
 

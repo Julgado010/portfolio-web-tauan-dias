@@ -21,7 +21,8 @@
 (function embers() {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const box = document.getElementById("embers");
-  for (let i = 0; i < 22; i++) {
+  const count = matchMedia("(max-width: 640px)").matches ? 10 : 18;
+  for (let i = 0; i < count; i++) {
     const s = document.createElement("span");
     s.style.left = Math.random() * 100 + "%";
     s.style.animationDuration = 8 + Math.random() * 10 + "s";
@@ -164,7 +165,8 @@ const Bgm = (() => {
 const bgmBtn = document.getElementById("bgm");
 function render() {
   if (!bgmBtn) return;
-  bgmBtn.textContent = "Música de fundo: " + (Bgm.failed ? "indisponível" : Bgm.on ? "ligada" : "desligada");
+  const short = matchMedia("(max-width: 640px)").matches;
+  bgmBtn.textContent = (short ? "Música: " : "Música de fundo: ") + (Bgm.failed ? "indisponível" : Bgm.on ? "ligada" : "desligada");
   bgmBtn.setAttribute("aria-pressed", String(Bgm.on));
   bgmBtn.hidden = !Bgm.has || Bgm.failed;   // sem arquivo de música, o botão não aparece
 }
@@ -281,16 +283,19 @@ vol.addEventListener("input", () => { if (player && player.setVolume) player.set
 
 // ---------- Personagem (quadros pré-renderizados da minha skin) ----------
 const CHAR_DIR = "assets/char/";
-["idle0","idle1","wave0","wave1","wave2","wave3","look0","look1","look2","look3","look4",
- "stand0","stand1","reach0","reach1","reach2","reach3","cheer0","cheer1","walk0","walk1","walk2","walk3"]
-  .forEach((n) => { const i = new Image(); i.src = CHAR_DIR + n + ".png"; });
+const CHAR_EXT = ".webp";
+// Carrega primeiro os quadros da abertura e, quando o navegador estiver livre, os do início
+const preload = (names) => names.forEach((n) => { const i = new Image(); i.decoding = "async"; i.src = CHAR_DIR + n + CHAR_EXT; });
+preload(["walk1","walk2","walk3","stand0","stand1","reach0","reach1","reach2","reach3","cheer0","cheer1"]);
+(window.requestIdleCallback || ((f) => setTimeout(f, 1200)))(() =>
+  preload(["idle0","idle1","wave0","wave1","wave2","wave3","look0","look1","look2","look3","look4"]));
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 (function heroChar() {
   const img = document.getElementById("hero-char");
   const stage = document.getElementById("stage");
   if (!img || !stage) return;
-  const set = (n) => { img.src = CHAR_DIR + n + ".png"; };
+  const set = (n) => { img.src = CHAR_DIR + n + CHAR_EXT; };
   if (reducedMotion) return;
   let waving = false, tick = 0, lastMove = 0;
   setInterval(() => {                       // respira quando ninguém mexe o mouse
@@ -342,7 +347,7 @@ let introActive = !!intro;
   const chest = document.getElementById("chest");
   const stage = intro.querySelector(".intro-stage");
   const ch = document.getElementById("intro-char");
-  const setC = (n) => { ch.src = CHAR_DIR + n + ".png"; };
+  const setC = (n) => { ch.src = CHAR_DIR + n + CHAR_EXT; };
   const timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
   let walkIv, idleIv, cheerIv;
